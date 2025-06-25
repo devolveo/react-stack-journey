@@ -64,3 +64,47 @@ h1 {
 #new-quote-btn:hover {
   background: #5a67d8;
 }
+
+/* Add these new styles to your existing CSS */
+
+.quote-text {
+  display: block;
+  line-height: 1.6;
+}
+
+.quote-category {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  font-style: normal;
+}
+
+#quote {
+  transition: opacity 0.3s ease;
+}
+
+/* Keyboard hint */
+.container::after {
+  content: "💡 Tip: Press SPACE or ENTER for new quote!";
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive improvements */
+@media (max-width: 600px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  #quote {
+    font-size: 1.1rem;
+  }
+}

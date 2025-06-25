@@ -1,6 +1,6 @@
 // Step 3: Prevent repeating the same quote twice in a row
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Page loaded!");
+  console.log("Page loaded with modern JavaScript!");
 
   const quotes = [
     {
@@ -40,17 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
     } while (randomNumber === lastQuoteIndex && quotes.length > 1);
 
     lastQuoteIndex = randomNumber; // Remember this quote
-    const selectedQuote = quotes[randomNumber];
+    const { text, author } = quotes[randomNumber];
 
-    quoteElement.textContent = selectedQuote.text;
-    authorElement.textContent = "— " + selectedQuote.author;
+    quoteElement.textContent = text;
+    authorElement.textContent = `— ${author}`;
 
-    console.log("Showing quote number:", randomNumber);
-    console.log("Previous quote was:", lastQuoteIndex);
+    console.log(`Showing quote ${randomNumber}: "${text}"`);
   }
 
   newQuoteBtn.addEventListener("click", showRandomQuote);
   showRandomQuote(); // Show first quote
 
-  console.log("Quote generator ready with no-repeat feature!");
+  console.log("Modern quote generator ready!");
 });

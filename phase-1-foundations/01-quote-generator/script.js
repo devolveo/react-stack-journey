@@ -51,5 +51,16 @@ document.addEventListener("DOMContentLoaded", function () {
   newQuoteBtn.addEventListener("click", showRandomQuote);
   showRandomQuote(); // Show first quote
 
+  //add keyboard key press support
+  const handleKeyPress = (event) => {
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      showRandomQuote();
+      console.log("New quote via keyboard!");
+    }
+  };
+
+  document.addEventListener("keydown", handleKeyPress);
   console.log("Modern quote generator ready!");
+  console.log("Keyboard shortcuts active: SPACE or ENTER for new quotes");
 });

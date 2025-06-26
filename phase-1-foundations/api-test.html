@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Call</title>
+</head>
+
+<body>
+    <h1>API Test Page</h1>
+    <button id="test-btn">Test API Call</button>
+    <div id="result"></div>
+
+    <script>
+        // const URL_API = 'https://jsonplaceholder.typicode.com/posts/1';
+        const URL_API = 'https://dummyjson.com/quotes/random';
+        document.addEventListener('DOMContentLoaded', () => {
+            const testBtn = document.getElementById('test-btn');
+            const resultDiv = document.getElementById('result');
+
+            const testAPI = async () => {
+                try {
+                    resultDiv.textContent = 'Loading...';
+                    console.log('Starting API call...');
+
+                    const response = await fetch(URL_API);
+                    const data = await response.json();
+
+                    console.log('API Response: ', data);
+                    resultDiv.innerHTML = `
+                        <p><strong>Quote:</strong> "${data.quote}"</p>
+                        <p><strong>Author:</strong> ${data.author}</p>
+                        <p><strong>ID:</strong> ${data.id}</p>                        
+                    `;
+
+                } catch (error) {
+                    console.log('Error: ', error);
+                    resultDiv.textContent = 'Error loading Quote!';
+                }
+            }
+
+            testBtn.addEventListener('click', testAPI);
+        });
+    </script>
+</body>
+
+</html>

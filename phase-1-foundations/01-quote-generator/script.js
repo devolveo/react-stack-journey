@@ -1,29 +1,7 @@
 // Step 3: Prevent repeating the same quote twice in a row
+const QUOTE_API = "https://dummyjson.com/quotes/random";
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Page loaded with modern JavaScript!");
-
-  const quotes = [
-    {
-      text: "The only way to do great work is to love what you do.",
-      author: "Steve Jobs",
-    },
-    {
-      text: "Life is what happens when you're busy making other plans.",
-      author: "John Lennon",
-    },
-    {
-      text: "The future belongs to those who believe in their dreams.",
-      author: "Eleanor Roosevelt",
-    },
-    {
-      text: "It is during our darkest moments that we must focus to see the light.",
-      author: "Aristotle",
-    },
-    {
-      text: "The way to get started is to quit talking and begin doing.",
-      author: "Walt Disney",
-    },
-  ];
+  console.log("Page loaded with API Integration!");
 
   const quoteElement = document.getElementById("quote");
   const authorElement = document.getElementById("author");
@@ -48,14 +26,42 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(`Showing quote ${randomNumber}: "${text}"`);
   }
 
-  newQuoteBtn.addEventListener("click", showRandomQuote);
-  showRandomQuote(); // Show first quote
+  async function fetchQuoteFromAPI() {
+    try {
+      console.log("Fetching new quote from API...");
+
+      quoteElement.textContent = "Loading new quote...";
+      authorElement.textContent = "";
+
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      //fetch from API
+      const response = await fetch(QUOTE_API);
+      const data = await response.json();
+
+      console.log("API response: ", data);
+
+      //update the display
+      quoteElement.textContent = `"${data.quote}"`;
+      authorElement.textContent = `— ${data.author}`;
+    } catch (error) {
+      console.error("Error fetching data from API", error);
+      quoteElement.textContent =
+        "Sorry, could not load a new quote. Please try again.";
+      authorElement.textContent = "~";
+    }
+  }
+
+  newQuoteBtn.addEventListener("click", fetchQuoteFromAPI);
+  fetchQuoteFromAPI(); // Show first quote
+
+  console.log("API-powered quote gnerator ready!");
 
   //add keyboard key press support
   const handleKeyPress = (event) => {
     if (event.key === " " || event.key === "Enter") {
       event.preventDefault();
-      showRandomQuote();
+      fetchQuoteFromAPI();
       console.log("New quote via keyboard!");
     }
   };

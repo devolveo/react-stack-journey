@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header class="dashboard-header">
+            <h1>Personal Dashboard</h1>
+            <button id="theme-toggle">🌙 Dark Mode</button>
+        </header>
+
+        <div class="features-grid">
+            <!-- Feature 1: Smart Counter -->
+            <div class="feature-card" id="counter-card">
+                <h2>Smart Counter</h2>
+                <div class="counter-display">
+                    <span id="counter-value">0</span>
+                </div>
+                <div class="counter-controls">
+                    <button id="counter-minus">-</button>
+                    <button id="counter-plus">+</button>
+                    <button id="counter-reset">Reset</button>
+                </div>
+                <div class="counter-info">
+                    <small>Use ↑/↓ arrow keys | Limit: -10 to 100</small>
+                </div>
+            </div>
+
+            <!-- Feature 2: Color Picker -->
+            <div class="feature-card" id="color-card">
+                <h2>Background Colors</h2>
+                <div class="color-grid">
+                    <button class="color-btn" data-color="#ff6b6b" style="background: #ff6b6b;"></button>
+                    <button class="color-btn" data-color="#4ecdc4" style="background: #4ecdc4;"></button>
+                    <button class="color-btn" data-color="#45b7d1" style="background: #45b7d1;"></button>
+                    <button class="color-btn" data-color="#96ceb4" style="background: #96ceb4;"></button>
+                    <button class="color-btn" data-color="#feca57" style="background: #feca57;"></button>
+                    <button class="color-btn" data-color="#ff9ff3" style="background: #ff9ff3;"></button>
+                </div>
+                <button id="random-color">🎲 Random Color</button>
+                <div class="current-color">
+                    <small>Current: <span id="color-display">#667eea</span></small>
+                </div>
+            </div>
+
+            <!-- Feature 3: Settings -->
+            <div class="feature-card" id="settings-card">
+                <h2>Settings</h2>
+                <div class="setting-item">
+                    <label>Counter Step:</label>
+                    <select id="counter-step">
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="sound-effects">
+                        Sound Effects
+                    </label>
+                </div>
+                <button id="clear-data">Clear All Data</button>
+            </div>
+
+            <!-- Feature 4: Stats -->
+            <div class="feature-card" id="stats-card">
+                <h2>Usage Stats</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Button Clicks:</span>
+                        <span id="click-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Color Changes:</span>
+                        <span id="color-changes">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Session Time:</span>
+                        <span id="session-time">0s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

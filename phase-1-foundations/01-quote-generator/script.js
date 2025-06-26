@@ -210,10 +210,152 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("=== END ARRAY METHODS TEST ===\n");
   }
 
+  // SEARCH FUNCTIONALITY using array methods
+  let allQuotes = []; // Store all quotes for searching
+
+  async function loadAllQuotes() {
+    try {
+      console.log("Loading all quotes for search...");
+      quoteElement.textContent = "Loading quotes database...";
+      authorElement.textContent = "";
+
+      const quotes = await fetchMultipleQuotes();
+      allQuotes = quotes; // Store globally for searching
+
+      console.log("Loaded", allQuotes.length, "quotes for searching");
+
+      // Show first quote
+      displayQuote(allQuotes[0]);
+
+      return allQuotes;
+    } catch (error) {
+      console.error("Error loading quotes:", error);
+      allQuotes = localQuotes; // Fallback
+      return allQuotes;
+    }
+  }
+
+  function displayQuote(quote) {
+    quoteElement.textContent = `"${quote.quote || quote.text}"`;
+    authorElement.textContent = `— ${quote.author}`;
+  }
+
+  function searchQuotes() {
+    const searchTerm = document
+      .getElementById("search-input")
+      .value.toLowerCase()
+      .trim();
+
+    if (searchTerm === "") {
+      alert("Please enter a search term!");
+      return;
+    }
+
+    console.log("Searching for:", searchTerm);
+
+    // Use FILTER to search through quotes
+    const results = allQuotes.filter((quote) => {
+      const quoteText = (quote.quote || quote.text || "").toLowerCase();
+      const author = quote.author.toLowerCase();
+
+      // Search in both quote text and author name
+      return quoteText.includes(searchTerm) || author.includes(searchTerm);
+    });
+
+    console.log("Search results:", results.length, "matches");
+
+    if (results.length === 0) {
+      quoteElement.textContent = `No quotes found for "${searchTerm}"`;
+      authorElement.textContent = "Try a different search term";
+    } else {
+      // Show first result
+      displayQuote(results[0]);
+      console.log(`Showing first of ${results.length} results`);
+
+      // Log all matches for debugging
+      console.log(
+        "All matches:",
+        results.map((q) => ({
+          author: q.author,
+          preview: (q.quote || q.text).substring(0, 50) + "...",
+        }))
+      );
+    }
+  }
+
+  function showAllQuotes() {
+    if (allQuotes.length === 0) {
+      loadAllQuotes();
+    } else {
+      // Show random quote from all quotes
+      const randomIndex = Math.floor(Math.random() * allQuotes.length);
+      displayQuote(allQuotes[randomIndex]);
+      console.log(`Showing random quote from ${allQuotes.length} total quotes`);
+    }
+  }
+
   document.addEventListener("keydown", handleKeyPress);
   console.log("Modern quote generator ready!");
   console.log("Keyboard shortcuts active: SPACE or ENTER for new quotes");
 
   const testArraysBtn = document.getElementById("test-arrays-btn");
   testArraysBtn.addEventListener("click", testArrayMethods);
+
+  // Add search event listeners
+  const searchBtn = document.getElementById("search-btn");
+  const showAllBtn = document.getElementById("show-all-btn");
+  const searchInput = document.getElementById("search-input");
+
+  searchBtn.addEventListener("click", searchQuotes);
+  showAllBtn.addEventListener("click", showAllQuotes);
+
+  // Search when pressing Enter in the input
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      searchQuotes();
+    }
+  });
+
+  // CATEGORY FILTER using array methods
+  function filterByCategory() {
+    console.log("=== CATEGORY FILTERING DEMO ===");
+
+    // Use our local quotes (they have categories)
+    const quotes = localQuotes;
+
+    // Get unique categories using MAP + SET (advanced technique!)
+    const categories = [...new Set(quotes.map((quote) => quote.category))];
+    console.log("Available categories:", categories);
+
+    // Filter by each category
+    categories.forEach((category) => {
+      const categoryQuotes = quotes.filter(
+        (quote) => quote.category === category
+      );
+      console.log(`${category} quotes:`, categoryQuotes.length);
+
+      // Show sample from each category
+      if (categoryQuotes.length > 0) {
+        console.log(
+          `  Sample: "${categoryQuotes[0].text}" - ${categoryQuotes[0].author}`
+        );
+      }
+    });
+    // Demo: Show quotes from motivation category
+    const motivationQuotes = quotes.filter(
+      (quote) => quote.category === "motivation"
+    );
+    if (motivationQuotes.length > 0) {
+      const randomMotivation =
+        motivationQuotes[Math.floor(Math.random() * motivationQuotes.length)];
+      displayQuote(randomMotivation);
+      console.log("Showing random motivation quote");
+    }
+
+    console.log("=== END CATEGORY FILTERING ===");
+  }
+
+  // Add category demo button
+  const categoryBtn = document.getElementById("category-btn");
+  categoryBtn.addEventListener("click", filterByCategory);
 });

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="weather-app">
+        <!-- HEADER: Semantic + Layout Container Pattern -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">🌤️ Weather Dashboard</h1>
+                <div class="search-container">
+                    <input type="text" id="city-input" class="search-input" placeholder="Enter city name...">
+                    <button id="btn-search" class="btn btn-primary">Search</button>
+                    <button id="btn-location" class="btn btn-secondary">📍 My Location</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN: Semantic + Layout Container Pattern -->
+        <main class="main">
+            <div class="main-content">
+
+                <!-- Loading State -->
+                <div id="loading-container" class="loading-state hidden">
+                    <div class="spinner"></div>
+                    <p>Getting weather data...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="error-message" class="error-state hidden">
+                    <p>Unable to get weather data. Please try again.</p>
+                </div>
+
+                <!-- CURRENT WEATHER SECTION: Container for weather info -->
+                <section id="current-weather" class="weather-section hidden">
+                    <h2 class="section-title">Current Weather</h2>
+
+                    <!-- Weather Main Layout -->
+                    <div class="weather-layout">
+                        <div class="weather-info">
+                            <h3 id="city-name">New York, NY</h3>
+                            <p id="weather-description">Partly Cloudy</p>
+                            <div class="temperature-display">
+                                <span id="temperature">72</span>
+                                <span class="unit">°C</span>
+                            </div>
+                        </div>
+                        <div class="weather-icon">
+                            <span id="weather-emoji">🌤️</span>
+                        </div>
+                    </div>
+
+                    <!-- Weather Details: Individual cards for each detail -->
+                    <div class="details-grid">
+                        <div class="card detail-card">
+                            <span class="label">Feels like</span>
+                            <span id="feels-like" class="value">75°C</span>
+                        </div>
+                        <div class="card detail-card">
+                            <span class="label">Humidity</span>
+                            <span id="humidity" class="value">65%</span>
+                        </div>
+                        <div class="card detail-card">
+                            <span class="label">Wind Speed</span>
+                            <span id="wind-speed" class="value">12 km/h</span>
+                        </div>
+                        <div class="card detail-card">
+                            <span class="label">Pressure</span>
+                            <span id="pressure" class="value">1013 hPa</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FORECAST SECTION: Container for 5-day forecast -->
+                <section id="forecast-section" class="forecast-section hidden">
+                    <h2 class="section-title">5-Day Forecast</h2>
+                    <div class="forecast-grid">
+                        <!-- Individual forecast cards -->
+                        <div class="card forecast-card">
+                            <p class="forecast-day">Mon</p>
+                            <span class="forecast-icon">🌤️</span>
+                            <p class="forecast-high">72°</p>
+                            <p class="forecast-low">60°</p>
+                        </div>
+                        <div class="card forecast-card">
+                            <p class="forecast-day">Tue</p>
+                            <span class="forecast-icon">🌧️</span>
+                            <p class="forecast-high">68°</p>
+                            <p class="forecast-low">55°</p>
+                        </div>
+                        <div class="card forecast-card">
+                            <p class="forecast-day">Wed</p>
+                            <span class="forecast-icon">☀️</span>
+                            <p class="forecast-high">75°</p>
+                            <p class="forecast-low">62°</p>
+                        </div>
+                        <div class="card forecast-card">
+                            <p class="forecast-day">Thu</p>
+                            <span class="forecast-icon">⛅</span>
+                            <p class="forecast-high">70°</p>
+                            <p class="forecast-low">58°</p>
+                        </div>
+                        <div class="card forecast-card">
+                            <p class="forecast-day">Fri</p>
+                            <span class="forecast-icon">🌤️</span>
+                            <p class="forecast-high">73°</p>
+                            <p class="forecast-low">61°</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

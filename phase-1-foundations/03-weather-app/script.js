@@ -68,12 +68,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cityInput.value = lastCity;
 
+      //add visual feedback
+      showLastSearchIndicator(lastCity);
+
       fetchWeatherData(lastCity);
 
       console.log("Auto-loaded weather for: ", lastCity);
     } else {
       console.log("No previous search found");
     }
+  }
+
+  // 🆕 Show visual indicator for auto-loaded search
+  function showLastSearchIndicator(cityName) {
+    // Create a temporary message
+    const message = document.createElement("div");
+    message.textContent = `🔄 Loading your last search: ${cityName}`;
+    message.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4a90e2;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `;
+
+    document.body.appendChild(message);
+
+    // Animate in
+    setTimeout(() => (message.style.opacity = "1"), 100);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+      message.style.opacity = "0";
+      setTimeout(() => document.body.removeChild(message), 300);
+    }, 3000);
   }
 
   async function fetchWeatherData(city) {

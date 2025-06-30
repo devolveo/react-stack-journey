@@ -37,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Event listener attached!");
 
+  //call load last search when page loads
+  loadLastSearch();
+
   async function handleSeach() {
     const city = cityInput.value.trim();
 
@@ -46,12 +49,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     console.log("Searching for:", city);
+    localStorage.setItem("lastSearchedCity", city);
+
+    console.log("saved to local storage: ", city);
     await fetchWeatherData(city);
   }
 
   async function handleLocationSearch() {
     console.log("Location search clicked!");
     alert("Location feature coming soon");
+  }
+
+  function loadLastSearch() {
+    const lastCity = localStorage.getItem("lastSearchedCity");
+
+    if (lastCity) {
+      console.log("Found last search city: ", lastCity);
+
+      cityInput.value = lastCity;
+
+      fetchWeatherData(lastCity);
+
+      console.log("Auto-loaded weather for: ", lastCity);
+    } else {
+      console.log("No previous search found");
+    }
   }
 
   async function fetchWeatherData(city) {

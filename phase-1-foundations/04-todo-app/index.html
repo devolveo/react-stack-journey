@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo App</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="todo-app">
+        <header class="header">
+            <div class="header-container">
+                <h1 class="app-title">📝 My Todo App</h1>
+
+                <div class="input-container">
+                    <input type="text" id="task-input" class="task-input" placeholder="Enter your task here..."
+                        maxlength="100" autocomplete="off">
+                    <button id="add-btn" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main-container">
+                <!-- Task Counter & Filter Section -->
+                <section class="task-stats-section">
+                    <div class="stats-wrapper">
+                        📊 <span class="total-count">
+                            <span id="total-tasks">0</span> tasks total
+                        </span>
+                        <div class="filter-buttons">
+                            <button id="filter-pending" class="filter-btn active" data-filter="pending">
+                                <span id="pending-count">0</span> pending
+                            </button>
+                            <span class="separator">.</span>
+                            <button id="filter-completed" class="filter-btn" data-filter="completed">
+                                <span id="done-count">0</span> done
+                            </button>
+                            <span class="separator">.</span>
+                            <button id="filter-all" class="filter-btn" data-filter="all">show all</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Task List Container -->
+                <section class="task-list-section">
+                    <!-- Empty State Message (shown when no tasks) -->
+
+
+
+                    <div id="empty-state" class="empty-state-wrapper">
+                        <div class="empty-content">
+                            <span class="empty-icon">🚀</span>
+                            <h3 class="empty-title">No tasks yet!</h3>
+                            <p class="empty-message">Add your first task above to get started.</p>
+                        </div>
+                    </div>
+
+                    <!-- Task List (where individual tasks will appear) -->
+                    <div id="task-list" class="task-list">
+                        <!-- Tasks will be dynamically generated here by JavaScript -->
+                        <!-- Example structure (for reference, will be created by JS):
+                
+                <div class="task-item" data-task-id="task-123">
+                    <label class="task-checkbox-container">
+                        <input type="checkbox" class="task-checkbox">
+                        <span class="task-text">Learn localStorage</span>
+                    </label>
+                    <button class="delete-btn" data-task-id="task-123">🗑️</button>
+                </div>
+                
+                -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
